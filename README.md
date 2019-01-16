@@ -106,17 +106,9 @@ DNS 方式请参考 [bypass-GFW-SNI/main](https://github.com/bypass-GFW-SNI/main
 
 与 DNS 有关的参数 `gfwDNS` 在更改时可能需要与 `var` 中的 `gfwDnsCli` 中的 `New` 函数所对应地同时进行更改。更详细地说，需要更改其中新建 `dns.Client` 的 `Net` 参数，其与 DNS 所须的请求方式有关。参见 [DNS 包文档](https://godoc.org/github.com/miekg/dns#Client)。
 
----
-
-同时，程序监听的 53 和 80 端口是可选的，在 `main()` 函数的两个 Goroutine（`go func() {...}()`）的函数注释或开头加入 `return` 便可。详细对应位置可通过阅读注释找到。
-
-若不监听 53 端口，则程序将无法自动将域名解析至回环地址，用户也无法将 DNS 设置为 `localhost`。若此时依然想使用此程序，需手动配置 Hosts 文件，并将需要的域名，包括子域名，映射为本地回环地址。
-
-若不监听 80 端口，则在不小心访问被封锁域名的 80 端口时将会出现无法访问的情况；或者若未配置 DNS 也未配置 Hosts 的话，将会被 GFW 所阻拦。
-
 # TODO
 
-- [ ] 命令函参数配置
+- [ ] 命令行参数配置
 - [ ] 外部可用 IP 缓存文件
 - [ ] 多上游无污染 DNS
 - [ ] 直接拦截代理而不使用本地 Pipe

@@ -181,7 +181,7 @@ func forward443(ctx context.Context, network, addr string) (net.Conn, error) {
 	if err != nil {
 		return nil, err
 	}
-	if port != "443" {
+	if port != "443" || net.ParseIP(host) != nil {
 		var d net.Dialer
 		return d.DialContext(ctx, network, addr)
 	}
